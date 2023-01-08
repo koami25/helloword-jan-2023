@@ -20,15 +20,15 @@ pipeline {
 
             }
         }
-        stage('test') {
+        stage('deploy') {
             steps {
-                sh 'mvn test'
+                echo 'deploy'
                 sleep 5
             }
         }
-        stage('test') {
+        stage('Docker') {
             steps {
-                sh 'mvn test'
+                sh 'docker image'
                 sleep 5
             }
         }
