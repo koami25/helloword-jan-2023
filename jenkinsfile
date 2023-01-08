@@ -20,17 +20,6 @@ pipeline {
 
             }
         }
-        stage('deploy') {
-            steps {
-                echo 'deploy'
-                sleep 5
-            }
-        }
-        stage('Docker') {
-            steps {
-                sh 'docker image'
-                sleep 5
-            }
-        }
+        
     }
 }                         
