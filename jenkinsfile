@@ -1,37 +1,25 @@
 pipeline {
     agent any
+    tools{
+        maven 'M2_HOME'
+    }    
 
     stages {
         stage('build') {
             steps {
-                echo 'build step'
+                sh 'mvn clean'
+                sh 'mvn install'
+                sh 'mvn package'
                 sleep 5
             }
         }
         stage('test') {
             steps {
-                echo 'test step'
+                sh 'mvn test'
                 sleep 5
 
             }
         }
-        stage('deploy') {
-            steps {
-                echo 'deploy step'
-                sleep 5
-            }
-        }
-        stage('configure') {
-            steps {
-                echo 'configure step'
-                sleep 5
-            }
-        }
-        stage('docker') {
-            steps {
-                echo 'docker image step'
-                sleep 5
-            }
-        }
+       
     }
 }
