@@ -20,6 +20,17 @@ pipeline {
 
             }
         }
-       
+        stage('test') {
+            steps {
+                sh 'mvn test'
+                sleep 5
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+                sleep 5
+            }
+        }
     }
-}
+}                         
