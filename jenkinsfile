@@ -19,7 +19,7 @@ pipeline {
         jdk "JAVA_HOME" // JAVA_HOME
     }
     environment {
-        scannerHome = tool 'SonarQube' // SonarQube
+        SONAR_RUNNER_HOME = tool 'SonarQube' // SonarQube
     }
             steps {
                  withSonarQubeEnv(installationName: 'SonarQube') {
