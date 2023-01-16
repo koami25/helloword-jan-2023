@@ -3,33 +3,42 @@ pipeline {
     tools{
         maven 'M2_HOME'
     }
-
+    environment {
+    registry = '908561271654.dkr.ecr.us-east-1.amazonaws.com/jenkin_ecr'
+    registryCredential = 'jenkin_ecr'
+    dockerimage = ''
+  }
     stages {
-        stage('build') {
-            steps {
-                sh 'maven clean'
-                sh  'maven install'
-                sh  'maven package'
-                sleep 10
+        stage('Checkout'){
+            steps{
+                git branch: 'main', url: 'https://github.com/koami25/helloword-jan-2023.git'
             }
         }
-        stage('test') {
+        stage('Code Build') {
             steps {
-                sh 'maven test'
-                sleep 10
+                sh 'mvn clean package'
             }
         }
-        stage('Deploy') {
+        stage('Test') {
             steps {
-                echo 'deployment step'
-
+                sh 'mvn test'
             }
         }
-        stage('docker') {
+        stage('Build Image') {
             steps {
-                echo 'docker image step'
+                script{
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                } 
             }
         }
-        
+        stage('Deploy image') {
+            steps{
+                script{ 
+                    docker.withRegistry("https://"+registry,"ecr:us-east-1:"+registryCredential) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }  
     }
 }
