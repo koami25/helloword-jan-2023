@@ -16,7 +16,7 @@ pipeline {
         }
         stage('SonarQube analysis') {
     tools {
-        jdk "jdk11" // JAVA_HOME
+        jdk "JAVA_HOME" // JAVA_HOME
     }
     environment {
         scannerHome = tool 'SonarQube Scanner' // SonarQube
