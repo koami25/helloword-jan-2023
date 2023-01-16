@@ -14,21 +14,12 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/koami25/helloword-jan-2023.git'
             }
         }
-        stage('SonarQube analysis') {
-    tools {
-        jdk "JAVA_HOME" // JAVA_HOME
-    }
-    environment {
-        SONAR_RUNNER_HOME = tool 'SonarQube' // SonarQube
-    }
-            steps {
-                 withSonarQubeEnv(installationName: 'SonarQube') {
-                 sh "${scannerHome}/opt/sonar-scanner -X"
-        }
-    }
+       
+            
+            
 }
                 }
-            }    
+                
 
             
         
